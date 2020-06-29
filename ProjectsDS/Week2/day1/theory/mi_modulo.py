@@ -27,3 +27,30 @@ t
 
 biblioteca.append(nuevo_libro)
 biblioteca
+
+def gusto(lista):
+
+    input("Le gusta la montania? ")
+    
+    if == "No":
+        funcion_zona(z)
+    else:
+        print("ok")
+
+gusto(lista=lista_informacion)
+
+lista = ["alex", "begoña", "gabriel", "sara", "ataulfo"]
+
+for k in lista:
+    if k == "gabriel":
+        continue
+    print(k)
+
+    for k, v in diccionario.items():
+    print("k", k)
+    print("v", v)
+    if k == "dict":
+        for x, y in v.items():
+            print("x", x)
+            print("y", y)
+    print("-------------")
