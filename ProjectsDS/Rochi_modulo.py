@@ -54,3 +54,20 @@ for k in lista:
             print("x", x)
             print("y", y)
     print("-------------")
+
+    # This file represents your module.
+# Write the code...
+
+
+def mean_visualization():
+    """ Draw the mean in a plot """
+    return None
+    pd.libraries
+
+def open_file(path_file):
+    """
+
+    Args:
+        path_file ([str]): Path where the file is.
+    """
+    #TODO (@rochilandia) This function must open a file
