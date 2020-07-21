@@ -5,7 +5,6 @@ def resta_2(a, b):
     return a - b
 
 
-Bonus: ¿Cómo meterías estos dos elementos en una lista llamada missing
 missing = []
 
 for titulo in biblioteca:
@@ -369,3 +368,119 @@ with open('data_indented.json', 'w+') as outfile:
     json.dump(json_readed, outfile, indent=4)
 
 df_json = pd.read_json("covid")
+
+___________________________
+
+DECORATOR 
+
+from functools import wraps
+from datetime import datetime
+import math
+import time
+
+def decorator_v2(timed):
+    def real_decorator(function):
+        @wraps(function)
+        def wrapper(*args, **kwargs):
+            if timed:
+                begin = time.time() 
+                begin_2 = datetime.now()
+            retval = function(*args, **kwargs)
+            if timed:
+                end = time.time()
+                end_2 = datetime.now()
+                print("--------------")
+                print("With time:")
+                print("Total time: ", end - begin, " seconds") 
+                print("--------------")
+                print("With datetime:")
+                print("Total datetime: ", end_2 - begin_2, " seconds") 
+            return retval
+        return wrapper
+    return real_decorator
+
+@decorator_v2(timed=True)
+def fact(a):
+    return math.factorial(a)
+
+fact(1000)
+
+--------------------------------------------
+
+def decorator(*args, **kwargs): 
+    print("Inside decorator") 
+    def inner(func): 
+        print("Inside inner function") 
+        print("I like", kwargs['like'])  
+        return func
+    return inner 
+
+@decorator(like="geeksforgeeks") 
+def func(): 
+    print("Inside actual function") 
+  
+func()
+
+------------------------------
+
+import time 
+import math 
+  
+def calculate_time(func): 
+    def inner1(*args, **kwargs):
+        print("Anterior") 
+        begin = time.time() 
+        func(*args, **kwargs) 
+        end = time.time() 
+        print("Total time", end - begin, " seconds") 
+    return inner1 
+  
+@calculate_time
+def factorial(num): 
+    #time.sleep(2) 
+    print(math.factorial(num)) 
+  
+factorial(2000)
+
+-------------------------------
+
+DESARMAR JSON 
+
+import pandas as pd
+import json
+
+df = pd.read_csv('http://pastebin.com/raw/7L86m9R2', \
+                 header=None, index_col=0, names=['data'])
+df
+
+pd.io.json.json_normalize(df.data.apply(json.loads))
+
+
+import pandas as pd 
+import matplotlib.pyplot as plt
+from functools import wraps
+
+def prepost (*args,**kwargs):
+    def inner (function):
+        @wraps(function)
+        def wrapper(*a, **k):
+            if "url" in kwargs:
+                df = pd.read_csv(kwargs["url"])
+                print("IfCompleted")
+            retval = function(*a, **k)
+            df.hist()
+            plt.show()
+            print("graphDone-Correct")
+            return retval
+        return wrapper
+    return inner
+
+k_url="http://winterolympicsmedals.com/medals.csv"
+
+@prepost(url=k_url)
+def _f_protected ():
+    l2 = [x for x in range(16)]
+    z= lambda x : True if x > 5 else False
+    return list(filter(z,l2))
+    
+_f_protected()
