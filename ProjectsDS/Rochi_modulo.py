@@ -484,3 +484,24 @@ def _f_protected ():
     return list(filter(z,l2))
     
 _f_protected()
+
+import pandas as pd
+import numpy as np
+import requests
+import matplotlib.pyplot as plt
+import json
+import seaborn as sns 
+from seaborn import kdeplot
+import plotly.express as px
+import plotly.graph_objects as go
+import plotly.figure_factory as ff
+from plotly.colors import n_colors
+from plotly.subplots import make_subplots
+import nbconvert as nb
+import nbformat
+%matplotlib inline 
+import plot as pltt
+import pycountry as pc 
+
+rating['que'] = rating.apply(lambda x : x['Effects'] if x['Effects'] == x['Criteria'] else "DIFFERENT", axis=1)
+rating

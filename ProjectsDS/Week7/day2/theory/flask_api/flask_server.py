@@ -41,7 +41,7 @@ html = """<html lang="es">
 
 app = Flask(__name__)  # init
 
-@app.route("/html")  # Default path
+@app.route("/")  # Default path
 def default():
     # Redirect
     #return redirect("http://aiconscience.ddns.net", code=302)
@@ -60,7 +60,7 @@ def get():
 @app.route('/give_me_id', methods=['GET'])
 def give_id():
     x = request.args['id']
-    return x + request.args
+    return request.args
 
 # A route to return all of the available entries in our catalog.
 @app.route('/api/test/', methods=['GET'])
