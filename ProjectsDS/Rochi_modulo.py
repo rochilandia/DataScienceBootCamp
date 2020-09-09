@@ -505,3 +505,28 @@ import pycountry as pc
 
 rating['que'] = rating.apply(lambda x : x['Effects'] if x['Effects'] == x['Criteria'] else "DIFFERENT", axis=1)
 rating
+
+
+Machine Learning
+
+train_errors, val_errors = [], []
+
+def plot_learning_curves(model, X, y):
+    X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.05)
+    
+    for m in range(1, len(X_train)):  # Incremental
+        
+        x = X_train[:m]
+        y = y_train[:m]
+        model.fit(x, y)
+
+        y_train_predict = model.predict(x)
+        y_val_predict = model.predict(X_val)
+
+        train_errors.append(mean_absolute_error(y, y_train_predict))
+        val_errors.append(mean_absolute_error(y_val, y_val_predict))
+        
+
+    plt.plot(train_errors, "r-+", linewidth=2, label="train")
+    plt.plot(val_errors, "b-", linewidth=3, label="val")
+    plt.show()
