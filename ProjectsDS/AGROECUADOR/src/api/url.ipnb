@@ -1,0 +1,11 @@
+import pandas as pd
+import numpy
+import matplotlib.pyplot as plt 
+import requests
+import json
+
+url="https://raw.githubusercontent.com/JimKing100/strains-live/master/data/cannabis.csv"
+
+
+datajson = rochi(url)
+    print(datajson)
